@@ -6,11 +6,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Scaffold
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -22,6 +18,7 @@ import androidx.navigation.compose.rememberNavController
 import com.emmanuel_yegon.expensemanager.pages.Expenses
 import com.emmanuel_yegon.expensemanager.pages.Settings
 import com.emmanuel_yegon.expensemanager.ui.theme.ExpenseManagerTheme
+import com.emmanuel_yegon.expensemanager.ui.theme.TopAppBarBackground
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,13 +32,12 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Scaffold(
                     bottomBar = {
-                        NavigationBar {
-
+                        NavigationBar(containerColor = TopAppBarBackground) {
                             NavigationBarItem(
                                 selected = backStackEntry.value?.destination?.route == "expenses",
                                 onClick = { navController.navigate("expenses") },
                                 icon = {
-                                    androidx.compose.material3.Icon(
+                                    Icon(
                                         painter = painterResource(id = R.drawable.upload),
                                         contentDescription = "Upload"
                                     )
@@ -55,7 +51,7 @@ class MainActivity : ComponentActivity() {
                                 selected = backStackEntry.value?.destination?.route == "reports",
                                 onClick = { navController.navigate("reports") },
                                 icon = {
-                                    androidx.compose.material3.Icon(
+                                     Icon(
                                         painter = painterResource(id = R.drawable.bar_chart),
                                         contentDescription = "Reports"
                                     )
@@ -69,7 +65,7 @@ class MainActivity : ComponentActivity() {
                                 selected = backStackEntry.value?.destination?.route == "add",
                                 onClick = { navController.navigate("add") },
                                 icon = {
-                                    androidx.compose.material3.Icon(
+                                    Icon(
                                         painter = painterResource(id = R.drawable.add),
                                         contentDescription = "Add"
                                     )
@@ -80,10 +76,10 @@ class MainActivity : ComponentActivity() {
                             )
 
                             NavigationBarItem(
-                                selected = backStackEntry.value?.destination?.route == "settings",
+                                selected = backStackEntry.value?.destination?.route?.startsWith("settings")?:false,
                                 onClick = { navController.navigate("settings") },
                                 icon = {
-                                    androidx.compose.material3.Icon(
+                                    Icon(
                                         painter = painterResource(id = R.drawable.outline_settings),
                                         contentDescription = "Settings"
                                     )

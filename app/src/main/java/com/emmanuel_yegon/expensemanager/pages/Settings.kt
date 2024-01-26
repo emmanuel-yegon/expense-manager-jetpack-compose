@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MediumTopAppBar
 import androidx.compose.material3.Scaffold
@@ -16,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.emmanuel_yegon.expensemanager.components.TableRow
 import com.emmanuel_yegon.expensemanager.ui.theme.BackgroundElevated
+import com.emmanuel_yegon.expensemanager.ui.theme.DividerColor
 import com.emmanuel_yegon.expensemanager.ui.theme.Shapes
 import com.emmanuel_yegon.expensemanager.ui.theme.TopAppBarBackground
 
@@ -40,8 +42,13 @@ fun Settings(navController: NavController) {
                         .background(BackgroundElevated)
                         .fillMaxWidth()
                 ) {
-                    TableRow("Categories", hasArrow = true)
-                    TableRow("Erase all data", isDestructive = true)
+                    TableRow("Categories", hasArrow = true, onClick = {_ ->
+                        run {
+                            navController.navigate("settings/categories")
+                        }
+                    })
+                    Divider(modifier=Modifier.padding(start=16.dp),thickness = 1.dp, color = DividerColor)
+                    TableRow("Erase all data", isDestructive = true, onClick = {})
                 }
             }
         }
