@@ -15,6 +15,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.emmanuel_yegon.expensemanager.pages.Add
 import com.emmanuel_yegon.expensemanager.pages.Expenses
 import com.emmanuel_yegon.expensemanager.pages.Settings
 import com.emmanuel_yegon.expensemanager.ui.theme.ExpenseManagerTheme
@@ -117,7 +118,7 @@ class MainActivity : ComponentActivity() {
                                         .fillMaxSize()
                                         .padding(innerPadding),
                                 ) {
-                                    Greeting(name = "Add")
+                                    Add(navController)
                                 }
                             }
 
