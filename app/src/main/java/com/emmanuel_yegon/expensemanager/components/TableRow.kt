@@ -29,17 +29,17 @@ fun TableRow(
     val textColor = if (isDestructive) Destructive else TextPrimary
 
     Row(
-        modifier = modifier.fillMaxWidth().padding(horizontal = 16.dp),
+        modifier = modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     )
        {
-        Text(text = label, style = Typography.bodyMedium, color = textColor, modifier = Modifier.padding( vertical = 10.dp))
+        Text(text = label, style = Typography.bodyMedium, color = textColor, modifier = Modifier.padding( horizontal = 16.dp,vertical = 10.dp))
         if (hasArrow) {
             Icon(
                 painter = painterResource(id = R.drawable.outline_chevron),
                 contentDescription = "Right arrow",
-                modifier= Modifier.padding(vertical = 10.dp)
+                modifier = Modifier.padding(horizontal = 16.dp,vertical = 10.dp)
             )
         }
 

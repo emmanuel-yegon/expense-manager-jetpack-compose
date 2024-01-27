@@ -2,24 +2,24 @@ package com.emmanuel_yegon.expensemanager.components
 
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.LocalTextStyle
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldColors
-import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.emmanuel_yegon.expensemanager.ui.theme.Primary
 import com.emmanuel_yegon.expensemanager.ui.theme.TextPrimary
 
+@OptIn( ExperimentalMaterial3Api::class)
 @Composable
 fun UnstyledTextField(
     value: String,
@@ -44,41 +44,57 @@ fun UnstyledTextField(
     minLines: Int = 1,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     shape: Shape = TextFieldDefaults.shape,
+    colors: TextFieldColors = TextFieldDefaults.colors()
+
 ) {
-    TextField(
-        value=value,
-        onValueChange=onValueChange,
-        modifier=modifier,
-        enabled=enabled,
-        readOnly=readOnly,
-        textStyle=textStyle.merge(
-            TextStyle(
-                color = TextPrimary,
+    val textColor = TextPrimary
+    val mergedTextStyle = textStyle.merge(TextStyle(color = textColor))
+
+    BasicTextField(
+
+        value = value,
+        modifier = modifier,
+        onValueChange = onValueChange,
+        enabled = enabled,
+        readOnly = readOnly,
+        textStyle = mergedTextStyle,
+        cursorBrush = SolidColor(Primary),
+        visualTransformation = visualTransformation,
+        keyboardOptions = keyboardOptions,
+        keyboardActions = keyboardActions,
+        interactionSource = interactionSource,
+        singleLine = singleLine,
+        maxLines = maxLines,
+        minLines = minLines,
+        decorationBox = @Composable { innerTextField ->
+            TextFieldDefaults.DecorationBox(
+                value = value,
+                innerTextField = innerTextField,
+                enabled = enabled,
+                singleLine = singleLine,
+                visualTransformation = visualTransformation,
+                interactionSource = interactionSource,
+                isError = isError,
+                label = label,
+                placeholder = placeholder,
+                leadingIcon = leadingIcon,
+                trailingIcon = trailingIcon,
+                prefix = prefix,
+                suffix = suffix,
+                supportingText = supportingText,
+                shape = shape,
+                colors = TextFieldDefaults.colors(
+                    unfocusedIndicatorColor = Color.Transparent,
+                    focusedIndicatorColor = Color.Transparent,
+                    disabledIndicatorColor = Color.Transparent,
+                    cursorColor = Primary,
+                    focusedContainerColor = Color.Transparent,
+                    unfocusedContainerColor = Color.Transparent
+                ),
+                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 0.dp),
             )
-        ),
-        label=label,
-        placeholder=placeholder,
-        leadingIcon=leadingIcon,
-        trailingIcon=trailingIcon,
-        prefix=prefix,
-        suffix=suffix,
-        supportingText=supportingText,
-        isError=isError,
-        visualTransformation=visualTransformation,
-        keyboardOptions=keyboardOptions,
-        keyboardActions=keyboardActions,
-        singleLine=singleLine,
-        maxLines=maxLines,
-        minLines=minLines,
-        interactionSource=interactionSource,
-        shape=shape,
-        colors=TextFieldDefaults.colors(
-            unfocusedIndicatorColor = Color.Transparent,
-            focusedIndicatorColor = Color.Transparent,
-            disabledIndicatorColor = Color.Transparent,
-            cursorColor = Primary,
-            focusedContainerColor = Color.Transparent,
-            unfocusedContainerColor = Color.Transparent
-        )
+        }
+
+
     )
 }

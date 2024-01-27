@@ -3,10 +3,7 @@ package com.emmanuel_yegon.expensemanager.pages
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -56,11 +53,11 @@ fun Add(navController: NavController) {
                             onValueChange = {},
                             modifier=Modifier.fillMaxWidth(),
                             textStyle = TextStyle(
-                                textAlign = TextAlign.End
+                                textAlign = TextAlign.Right
                             ),
                             keyboardOptions = KeyboardOptions(
                                 keyboardType = KeyboardType.Number
-                            )
+                            ),
                         )
                     }
                     Divider(
@@ -86,13 +83,9 @@ fun Add(navController: NavController) {
                         UnstyledTextField(
                             value = "",
                             onValueChange = {},
-                            placeholder={ Text(text = "Leave some notes")},
-                            modifier=Modifier.fillMaxWidth().height(44.dp),
+                            modifier=Modifier.fillMaxWidth(),
                             textStyle = TextStyle(
-                                textAlign = TextAlign.End
-                            ),
-                            keyboardOptions = KeyboardOptions(
-                                keyboardType = KeyboardType.Number
+                                textAlign = TextAlign.Right,
                             )
                         )
                     }

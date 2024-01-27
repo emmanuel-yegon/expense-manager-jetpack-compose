@@ -2,6 +2,6 @@
 <resources>
 
     <style name="Theme.ExpenseManager" parent="android:Theme.Material.Light.NoActionBar">
-        <item name="android:statusBarColor">@color/primary</item>
+        <item name="android:statusBarColor">@color/top_app_abr</item>
     </style>
 </resources>
