@@ -2,7 +2,10 @@ package com.emmanuel_yegon.expensemanager.components
 
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -28,13 +31,13 @@ fun UnstyledTextField(
     enabled: Boolean = true,
     readOnly: Boolean = false,
     textStyle: TextStyle = LocalTextStyle.current,
-    label: @Composable (() -> Unit)? = null,
-    placeholder: @Composable (() -> Unit)? = null,
-    leadingIcon: @Composable (() -> Unit)? = null,
-    trailingIcon: @Composable (() -> Unit)? = null,
-    prefix: @Composable (() -> Unit)? = null,
-    suffix: @Composable (() -> Unit)? = null,
-    supportingText: @Composable (() -> Unit)? = null,
+    label: @Composable() (() -> Unit)? = null,
+    placeholder: @Composable() (() -> Unit)? = null,
+    leadingIcon: @Composable() (() -> Unit)? = null,
+    trailingIcon: @Composable() (() -> Unit)? = null,
+    prefix: @Composable() (() -> Unit)? = null,
+    suffix: @Composable() (() -> Unit)? = null,
+    supportingText: @Composable() (() -> Unit)? = null,
     isError: Boolean = false,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
@@ -44,9 +47,9 @@ fun UnstyledTextField(
     minLines: Int = 1,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     shape: Shape = TextFieldDefaults.shape,
-    colors: TextFieldColors = TextFieldDefaults.colors()
+    arrangement: Arrangement.Horizontal = Arrangement.Start
 
-) {
+    ) {
     val textColor = TextPrimary
     val mergedTextStyle = textStyle.merge(TextStyle(color = textColor))
 
@@ -76,13 +79,18 @@ fun UnstyledTextField(
                 interactionSource = interactionSource,
                 isError = isError,
                 label = label,
-                placeholder = placeholder,
+                placeholder = {
+                  Row( modifier = Modifier.fillMaxWidth(), horizontalArrangement = arrangement){
+                      placeholder?.invoke()
+                  }
+                },
                 leadingIcon = leadingIcon,
                 trailingIcon = trailingIcon,
                 prefix = prefix,
                 suffix = suffix,
                 supportingText = supportingText,
                 shape = shape,
+                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 0.dp),
                 colors = TextFieldDefaults.colors(
                     unfocusedIndicatorColor = Color.Transparent,
                     focusedIndicatorColor = Color.Transparent,
@@ -90,8 +98,7 @@ fun UnstyledTextField(
                     cursorColor = Primary,
                     focusedContainerColor = Color.Transparent,
                     unfocusedContainerColor = Color.Transparent
-                ),
-                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 0.dp),
+                )
             )
         }
 

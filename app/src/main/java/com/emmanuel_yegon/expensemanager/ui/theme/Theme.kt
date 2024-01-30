@@ -37,7 +37,6 @@ fun ExpenseManagerTheme(
 ) {
     val colorScheme = DarkColorScheme
 
-
     MaterialTheme(
       colorScheme = colorScheme,
       typography = Typography,
