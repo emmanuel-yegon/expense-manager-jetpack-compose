@@ -20,10 +20,11 @@ import com.emmanuel_yegon.expensemanager.ui.theme.Typography
 
 @Composable
 fun TableRow(
-    label: String,
     modifier: Modifier = Modifier,
+    label: String? = null,
     hasArrow: Boolean = false,
     isDestructive: Boolean = false,
+    detailContent: (@Composable RowScope.()-> Unit)? = null,
     content: (@Composable RowScope.()-> Unit)? = null
 ) {
     val textColor = if (isDestructive) Destructive else TextPrimary
@@ -32,9 +33,18 @@ fun TableRow(
         modifier = modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
-    )
-       {
-        Text(text = label, style = Typography.bodyMedium, color = textColor, modifier = Modifier.padding( horizontal = 16.dp,vertical = 10.dp))
+    ) {
+        if(label != null){
+            Text(
+                text = label,
+                style = Typography.bodyMedium,
+                color = textColor,
+                modifier = Modifier.padding( horizontal = 16.dp,vertical = 10.dp))
+        }
+
+        if(content != null){
+            content()
+        }
         if (hasArrow) {
             Icon(
                 painter = painterResource(id = R.drawable.outline_chevron),
@@ -43,8 +53,8 @@ fun TableRow(
             )
         }
 
-         if (content != null){
-             content()
+         if (detailContent != null){
+             detailContent()
          }
 
     }

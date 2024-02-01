@@ -66,6 +66,9 @@ dependencies {
     implementation("androidx.compose.material:material-icons-extended:1.6.0")
     implementation("com.marosseleng.android:compose-material3-datetime-pickers:0.7.2")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
+    implementation("com.github.skydoves:colorpicker-compose:1.0.7")
+    implementation("com.godaddy.android.colorpicker:compose-color-picker:0.7.0")
+    implementation("com.godaddy.android.colorpicker:compose-color-picker-android:0.7.0")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

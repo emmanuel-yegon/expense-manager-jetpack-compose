@@ -2,11 +2,17 @@ package com.emmanuel_yegon.expensemanager
 
 import android.content.res.Configuration
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -16,6 +22,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.emmanuel_yegon.expensemanager.pages.Add
+import com.emmanuel_yegon.expensemanager.pages.Categories
 import com.emmanuel_yegon.expensemanager.pages.Expenses
 import com.emmanuel_yegon.expensemanager.pages.Settings
 import com.emmanuel_yegon.expensemanager.ui.theme.ExpenseManagerTheme
@@ -24,6 +31,7 @@ import com.emmanuel_yegon.expensemanager.ui.theme.TopAppBarBackground
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
         setContent {
             ExpenseManagerTheme {
 
@@ -138,7 +146,7 @@ class MainActivity : ComponentActivity() {
                                         .fillMaxSize()
                                         .padding(innerPadding),
                                 ) {
-                                    Greeting(name = "Categories")
+                                    Categories(navController)
                                 }
                             }
                         }

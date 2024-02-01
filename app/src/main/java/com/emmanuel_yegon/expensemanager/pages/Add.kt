@@ -88,7 +88,7 @@ fun Add(navController: NavController, vm: AddViewModel= viewModel()) {
                         .background(BackgroundElevated)
                         .fillMaxWidth()
                 ) {
-                    TableRow("Amount"){
+                    TableRow(label="Amount", detailContent = {
                         UnstyledTextField(
                             value = state.amount,
                             onValueChange = vm::setAmount,
@@ -103,14 +103,15 @@ fun Add(navController: NavController, vm: AddViewModel= viewModel()) {
                                 keyboardType = KeyboardType.Number
                             ),
                         )
-                    }
+                    })
+
                     Divider(
                         modifier = Modifier.padding(start = 16.dp),
                         thickness = 1.dp,
                         color = DividerColor
                     )
 
-                    TableRow("Recurrence", ){
+                    TableRow(label="Recurrence", detailContent = {
                         var recurrenceMenuOpened by remember {
                             mutableStateOf(false)
                         }
@@ -127,7 +128,9 @@ fun Add(navController: NavController, vm: AddViewModel= viewModel()) {
                                 }
                             }
                         }
-                    }
+                    })
+
+
                     Divider(
                         modifier = Modifier.padding(start = 16.dp),
                         thickness = 1.dp,
@@ -138,8 +141,7 @@ fun Add(navController: NavController, vm: AddViewModel= viewModel()) {
                         mutableStateOf(false)
                     }
 
-
-                    TableRow("Date"){
+                    TableRow(label="Date", detailContent = {
                         TextButton(onClick = { datePickerShowing = true }) {
                             Text(state.date.toString())
                         }
@@ -155,7 +157,7 @@ fun Add(navController: NavController, vm: AddViewModel= viewModel()) {
                                 title = { Text(text = "Select date", style = Typography.titleLarge)}
                             )
                         }
-                    }
+                    })
 
                     Divider(
                         modifier = Modifier.padding(start = 16.dp),
@@ -163,7 +165,7 @@ fun Add(navController: NavController, vm: AddViewModel= viewModel()) {
                         color = DividerColor
                     )
 
-                    TableRow("Note"){
+                    TableRow(label="Note", detailContent = {
                         UnstyledTextField(
                             value = state.note,
                             placeholder = { Text(text = "Leave some notes") },
@@ -174,18 +176,18 @@ fun Add(navController: NavController, vm: AddViewModel= viewModel()) {
                                 textAlign = TextAlign.Right,
                             )
                         )
-                    }
+                    })
+
                     Divider(
                         modifier = Modifier.padding(start = 16.dp),
                         thickness = 1.dp,
                         color = DividerColor
                     )
 
-                    TableRow("Category"){
+                    TableRow(label="Category", detailContent = {
                         var categoriesMenuOpened by remember {
                             mutableStateOf(false)
                         }
-
                         TextButton(onClick = { categoriesMenuOpened = true }, shape = Shapes.large) {
                             //TODO: change the color of the text based on the selected category
                             Text(state.category?: "Select a category first")
@@ -195,8 +197,8 @@ fun Add(navController: NavController, vm: AddViewModel= viewModel()) {
                                         text = {
                                             Row(verticalAlignment = Alignment.CenterVertically) {
                                                 // TODO: change the color based on the category
-                                            Surface (modifier = Modifier.size(10.dp), shape = CircleShape, color=Primary){}
-                                            Text( category, modifier = Modifier.padding(start = 8.dp)) } },
+                                                Surface (modifier = Modifier.size(10.dp), shape = CircleShape, color=Primary){}
+                                                Text( category, modifier = Modifier.padding(start = 8.dp)) } },
 
                                         onClick = {
                                             vm.setCategory(category)
@@ -205,7 +207,7 @@ fun Add(navController: NavController, vm: AddViewModel= viewModel()) {
                                 }
                             }
                         }
-                    }
+                    })
 
                 }
 
