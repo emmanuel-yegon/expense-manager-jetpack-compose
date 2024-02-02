@@ -69,6 +69,7 @@ dependencies {
     implementation("com.github.skydoves:colorpicker-compose:1.0.7")
     implementation("com.godaddy.android.colorpicker:compose-color-picker:0.7.0")
     implementation("com.godaddy.android.colorpicker:compose-color-picker-android:0.7.0")
+    implementation("me.saket.swipe:swipe:1.0.0")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

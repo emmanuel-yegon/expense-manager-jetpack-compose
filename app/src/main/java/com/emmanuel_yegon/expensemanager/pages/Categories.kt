@@ -36,15 +36,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.emmanuel_yegon.expensemanager.R
 import com.emmanuel_yegon.expensemanager.components.TableRow
 import com.emmanuel_yegon.expensemanager.components.UnstyledTextField
 import com.emmanuel_yegon.expensemanager.ui.theme.BackgroundElevated
+import com.emmanuel_yegon.expensemanager.ui.theme.Destructive
 import com.emmanuel_yegon.expensemanager.ui.theme.DividerColor
 import com.emmanuel_yegon.expensemanager.ui.theme.ExpenseManagerTheme
 import com.emmanuel_yegon.expensemanager.ui.theme.Shapes
@@ -55,6 +58,8 @@ import com.github.skydoves.colorpicker.compose.AlphaTile
 import com.github.skydoves.colorpicker.compose.BrightnessSlider
 import com.github.skydoves.colorpicker.compose.HsvColorPicker
 import com.github.skydoves.colorpicker.compose.rememberColorPickerController
+import me.saket.swipe.SwipeAction
+import me.saket.swipe.SwipeableActionsBox
 
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
@@ -64,6 +69,7 @@ fun Categories(navController: NavController, vm: CategoriesViewModel= viewModel(
     val uiState by vm.uiState.collectAsState()
 
     val colorPickerController = rememberColorPickerController()
+
 
     Scaffold(
         topBar = {
@@ -101,38 +107,55 @@ fun Categories(navController: NavController, vm: CategoriesViewModel= viewModel(
                         modifier = Modifier
                             .padding(16.dp)
                             .clip(Shapes.medium)
-                            .background(BackgroundElevated)
+//                            .background(BackgroundElevated)
                             .fillMaxWidth()
                     ) {
-                        itemsIndexed(uiState.categories){index, category->
-                            TableRow(){
-                                Row(verticalAlignment = Alignment.CenterVertically, modifier=Modifier.padding(horizontal = 16.dp)){
-                                    Surface (
-                                        color=category.color,
-                                        shape = CircleShape,
-                                        border= BorderStroke(
-                                            width = 2.dp,
-                                            color= Color.White
-                                        ),
-                                        modifier = Modifier.size(16.dp)
-                                    ){}
-                                    Text(
-                                        text = category.name,
-                                        modifier=Modifier
-                                            .padding(
-                                                horizontal = 16.dp,
-                                                vertical = 10.dp
+                        itemsIndexed(
+                            uiState.categories,
+                            key={_,category -> category.name}) {index, category->
+                            SwipeableActionsBox(
+                                endActions = listOf(
+                                    SwipeAction(
+                                        icon = painterResource(id = R.drawable.delete),
+                                        background = Destructive,
+                                        onSwipe = {vm.deleteCategory(category)}
+                                    ),
+                                ),
+                                modifier = Modifier.animateItemPlacement()
+                            ){
+                                TableRow(modifier=Modifier.background(BackgroundElevated)){
+                                    Row(verticalAlignment = Alignment.CenterVertically, modifier=Modifier.padding(horizontal = 16.dp)){
+                                        Surface (
+                                            color = category.color,
+                                            shape = CircleShape,
+                                            border= BorderStroke(
+                                                width = 2.dp,
+                                                color= Color.White
                                             ),
-                                        style = Typography.bodyMedium
-                                    )
+                                            modifier = Modifier.size(16.dp)
+                                        ){}
+                                        Text(
+                                            text = category.name,
+                                            modifier=Modifier
+                                                .padding(
+                                                    horizontal = 16.dp,
+                                                    vertical = 10.dp
+                                                ),
+                                            style = Typography.bodyMedium
+                                        )
+                                    }
                                 }
                             }
+
                             if(index < uiState.categories.size - 1){
-                                Divider(
-                                    modifier = Modifier.padding(start=16.dp),
-                                    thickness = 1.dp,
-                                    color = DividerColor
-                                )
+                                Row(modifier = Modifier.background(BackgroundElevated).height(1.dp)){
+                                    Divider(
+                                        modifier = Modifier.padding(start=16.dp),
+                                        thickness = 1.dp,
+                                        color = DividerColor
+                                    )
+                                }
+
                             }
                         }
 

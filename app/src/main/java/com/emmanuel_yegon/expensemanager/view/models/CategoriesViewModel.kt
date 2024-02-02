@@ -65,14 +65,28 @@ class CategoriesViewModel:ViewModel (){
                 _uiState.value.newCategoryColor
             )
         )
-            newCategoriesList.addAll(
-            _uiState.value.categories
+
+        newCategoriesList.addAll(
+                _uiState.value.categories
         )
         _uiState.update { currentState ->
             currentState.copy(
                 categories = newCategoriesList,
                 newCategoryName = "",
                 newCategoryColor = Color.White
+            )
+        }
+    }
+
+    fun deleteCategory(category: Category){
+        val index = _uiState.value.categories.indexOf(category)
+        val newList = mutableListOf<Category>()
+        newList.addAll(_uiState.value.categories)
+        newList.removeAt(index)
+
+        _uiState.update { currentState ->
+            currentState.copy(
+                categories = newList
             )
         }
     }

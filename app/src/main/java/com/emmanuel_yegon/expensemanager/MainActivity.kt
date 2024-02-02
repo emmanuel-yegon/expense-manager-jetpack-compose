@@ -14,6 +14,10 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -35,68 +39,76 @@ class MainActivity : ComponentActivity() {
         setContent {
             ExpenseManagerTheme {
 
+                var showBottomBar by rememberSaveable { mutableStateOf(true) }
                 val navController = rememberNavController()
-                val backStackEntry = navController.currentBackStackEntryAsState()
+                val backStackEntry by navController.currentBackStackEntryAsState()
 
-                // A surface container using the 'background' color from the theme
+                showBottomBar = when(backStackEntry?.destination?.route){
+                    "settings/categories" -> false
+                     else -> true
+                }
+
                 Scaffold(
                     bottomBar = {
-                        NavigationBar(containerColor = TopAppBarBackground) {
-                            NavigationBarItem(
-                                selected = backStackEntry.value?.destination?.route == "expenses",
-                                onClick = { navController.navigate("expenses") },
-                                icon = {
-                                    Icon(
-                                        painter = painterResource(id = R.drawable.upload),
-                                        contentDescription = "Upload"
-                                    )
-                                },
-                                label = {
-                                    Text(text = "Expenses")
-                                }
-                            )
+                        if (showBottomBar){
 
-                            NavigationBarItem(
-                                selected = backStackEntry.value?.destination?.route == "reports",
-                                onClick = { navController.navigate("reports") },
-                                icon = {
-                                     Icon(
-                                        painter = painterResource(id = R.drawable.bar_chart),
-                                        contentDescription = "Reports"
-                                    )
-                                },
-                                label = {
-                                    Text(text = "Reports")
-                                }
-                            )
+                            NavigationBar(containerColor = TopAppBarBackground) {
+                                NavigationBarItem(
+                                    selected = backStackEntry?.destination?.route == "expenses",
+                                    onClick = { navController.navigate("expenses") },
+                                    icon = {
+                                        Icon(
+                                            painter = painterResource(id = R.drawable.upload),
+                                            contentDescription = "Upload"
+                                        )
+                                    },
+                                    label = {
+                                        Text(text = "Expenses")
+                                    }
+                                )
 
-                            NavigationBarItem(
-                                selected = backStackEntry.value?.destination?.route == "add",
-                                onClick = { navController.navigate("add") },
-                                icon = {
-                                    Icon(
-                                        painter = painterResource(id = R.drawable.add),
-                                        contentDescription = "Add"
-                                    )
-                                },
-                                label = {
-                                    Text(text = "Add")
-                                }
-                            )
+                                NavigationBarItem(
+                                    selected = backStackEntry?.destination?.route == "reports",
+                                    onClick = { navController.navigate("reports") },
+                                    icon = {
+                                        Icon(
+                                            painter = painterResource(id = R.drawable.bar_chart),
+                                            contentDescription = "Reports"
+                                        )
+                                    },
+                                    label = {
+                                        Text(text = "Reports")
+                                    }
+                                )
 
-                            NavigationBarItem(
-                                selected = backStackEntry.value?.destination?.route?.startsWith("settings")?:false,
-                                onClick = { navController.navigate("settings") },
-                                icon = {
-                                    Icon(
-                                        painter = painterResource(id = R.drawable.outline_settings),
-                                        contentDescription = "Settings"
-                                    )
-                                },
-                                label = {
-                                    Text(text = "Settings")
-                                }
-                            )
+                                NavigationBarItem(
+                                    selected = backStackEntry?.destination?.route == "add",
+                                    onClick = { navController.navigate("add") },
+                                    icon = {
+                                        Icon(
+                                            painter = painterResource(id = R.drawable.add),
+                                            contentDescription = "Add"
+                                        )
+                                    },
+                                    label = {
+                                        Text(text = "Add")
+                                    }
+                                )
+
+                                NavigationBarItem(
+                                    selected = backStackEntry?.destination?.route?.startsWith("settings")?:false,
+                                    onClick = { navController.navigate("settings") },
+                                    icon = {
+                                        Icon(
+                                            painter = painterResource(id = R.drawable.outline_settings),
+                                            contentDescription = "Settings"
+                                        )
+                                    },
+                                    label = {
+                                        Text(text = "Settings")
+                                    }
+                                )
+                            }
                         }
                     },
 
