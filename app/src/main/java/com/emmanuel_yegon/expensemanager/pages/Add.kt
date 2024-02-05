@@ -57,7 +57,7 @@ import java.time.LocalDate
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
-fun Add(navController: NavController, vm: AddViewModel= viewModel()) {
+fun Add(navController: NavController, vm: AddViewModel = viewModel()) {
 
     val state by vm.uiState.collectAsState()
 
@@ -115,15 +115,18 @@ fun Add(navController: NavController, vm: AddViewModel= viewModel()) {
                         var recurrenceMenuOpened by remember {
                             mutableStateOf(false)
                         }
-                        TextButton(onClick = { recurrenceMenuOpened = true }, shape = Shapes.large) {
-                            Text(state.recurrence?.name?: Recurrence.None.name)
-                            DropdownMenu(expanded = recurrenceMenuOpened, onDismissRequest = { recurrenceMenuOpened = false  }) {
-                                recurrences.forEach{recurrence->
+                        TextButton(onClick = { recurrenceMenuOpened = true }, shape = Shapes.large)
+                        {
+                            Text(state.recurrence?.name ?: Recurrence.None.name)
+                            DropdownMenu(
+                                expanded = recurrenceMenuOpened,
+                                onDismissRequest = { recurrenceMenuOpened = false }) {
+                                recurrences.forEach { recurrence ->
                                     DropdownMenuItem(
-                                        text = {Text( recurrence.name) },
+                                        text = { Text(recurrence.name) },
                                         onClick = {
                                             vm.setRecurrence(recurrence)
-                                            recurrenceMenuOpened=false
+                                            recurrenceMenuOpened = false
                                         })
                                 }
                             }

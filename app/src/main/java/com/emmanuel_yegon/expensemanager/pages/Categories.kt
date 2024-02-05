@@ -55,7 +55,6 @@ import com.emmanuel_yegon.expensemanager.ui.theme.TopAppBarBackground
 import com.emmanuel_yegon.expensemanager.ui.theme.Typography
 import com.emmanuel_yegon.expensemanager.view.models.CategoriesViewModel
 import com.github.skydoves.colorpicker.compose.AlphaTile
-import com.github.skydoves.colorpicker.compose.BrightnessSlider
 import com.github.skydoves.colorpicker.compose.HsvColorPicker
 import com.github.skydoves.colorpicker.compose.rememberColorPickerController
 import me.saket.swipe.SwipeAction
@@ -202,13 +201,6 @@ fun Categories(navController: NavController, vm: CategoriesViewModel= viewModel(
                                         onColorChanged = { envelope ->
                                             vm.setNewCategoryColor(envelope.color)
                                         }
-                                    )
-                                    BrightnessSlider(
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .padding(10.dp)
-                                            .height(35.dp),
-                                        controller = colorPickerController
                                     )
                                     TextButton(
                                         onClick = vm::hideColorPicker,

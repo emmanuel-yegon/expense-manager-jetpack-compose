@@ -52,6 +52,7 @@ android {
 dependencies {
 
     val nav_version = "2.7.6"
+    val room_version = "2.6.1"
 
     implementation("androidx.navigation:navigation-compose:$nav_version")
     implementation("androidx.core:core-ktx:1.12.0")
@@ -70,6 +71,11 @@ dependencies {
     implementation("com.godaddy.android.colorpicker:compose-color-picker:0.7.0")
     implementation("com.godaddy.android.colorpicker:compose-color-picker-android:0.7.0")
     implementation("me.saket.swipe:swipe:1.0.0")
+    implementation("io.github.serpro69:kotlin-faker:1.15.0")
+
+    implementation("androidx.room:room-runtime:$room_version")
+    annotationProcessor("androidx.room:room-compiler:$room_version")
+
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
