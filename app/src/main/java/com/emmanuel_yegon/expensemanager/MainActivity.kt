@@ -28,6 +28,7 @@ import androidx.navigation.compose.rememberNavController
 import com.emmanuel_yegon.expensemanager.pages.Add
 import com.emmanuel_yegon.expensemanager.pages.Categories
 import com.emmanuel_yegon.expensemanager.pages.Expenses
+import com.emmanuel_yegon.expensemanager.pages.Reports
 import com.emmanuel_yegon.expensemanager.pages.Settings
 import com.emmanuel_yegon.expensemanager.ui.theme.ExpenseManagerTheme
 import com.emmanuel_yegon.expensemanager.ui.theme.TopAppBarBackground
@@ -129,7 +130,7 @@ class MainActivity : ComponentActivity() {
                                         .fillMaxSize()
                                         .padding(innerPadding),
                                 ) {
-                                    Greeting(name = "Reports")
+                                    Reports(navController)
                                 }
                             }
                             composable("add") {

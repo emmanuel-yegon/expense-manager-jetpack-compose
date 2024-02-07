@@ -72,6 +72,7 @@ dependencies {
     implementation("com.godaddy.android.colorpicker:compose-color-picker-android:0.7.0")
     implementation("me.saket.swipe:swipe:1.0.0")
     implementation("io.github.serpro69:kotlin-faker:1.15.0")
+    implementation("com.github.tehras:charts:0.2.4-alpha")
 
     implementation("androidx.room:room-runtime:$room_version")
     annotationProcessor("androidx.room:room-compiler:$room_version")

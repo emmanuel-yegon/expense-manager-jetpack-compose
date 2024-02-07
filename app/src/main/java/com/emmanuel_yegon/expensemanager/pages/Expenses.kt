@@ -61,7 +61,8 @@ fun Expenses(navController: NavController, vm: ExpensesViewModel = viewModel()) 
             Column(
                 modifier = Modifier
                     .padding(innerPadding)
-                    .padding(16.dp)
+                    .padding(horizontal = 16.dp)
+                    .padding(top = 16.dp)
                     .fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
