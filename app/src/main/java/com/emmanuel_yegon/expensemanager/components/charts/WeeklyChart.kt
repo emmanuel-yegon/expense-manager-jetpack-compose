@@ -1,14 +1,17 @@
 package com.emmanuel_yegon.expensemanager.components.charts
 
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.emmanuel_yegon.expensemanager.models.Expense
+import com.emmanuel_yegon.expensemanager.models.Recurrence
 import com.emmanuel_yegon.expensemanager.models.groupedByDayOfWeek
 import com.emmanuel_yegon.expensemanager.ui.theme.LabelSecondary
+import com.emmanuel_yegon.expensemanager.utils.simplifyNumber
 import com.github.tehras.charts.bar.BarChart
 import com.github.tehras.charts.bar.BarChartData
 import com.github.tehras.charts.bar.BarChartData.Bar
@@ -60,11 +63,16 @@ fun WeeklyChart(expenses: List<Expense>) {
                 )
             )
         ),
-        labelDrawer = LabelDrawer(),
+        labelDrawer = LabelDrawer(recurrence = Recurrence.Weekly),
         yAxisDrawer = SimpleYAxisDrawer(
             labelTextColor = LabelSecondary,
+            labelValueFormatter = ::simplifyNumber,
+            labelRatio = 7,
+            labelTextSize = 14.sp
         ),
-        barDrawer=BarDrawer(),
-        modifier = Modifier.height(147.dp).fillMaxWidth(),
+        barDrawer = BarDrawer(recurrence = Recurrence.Weekly),
+        modifier = Modifier
+            .padding(bottom = 20.dp)
+            .fillMaxSize(),
     )
 }
