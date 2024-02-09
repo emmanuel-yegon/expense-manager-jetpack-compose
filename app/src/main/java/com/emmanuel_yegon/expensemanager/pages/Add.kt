@@ -31,6 +31,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
@@ -211,12 +212,11 @@ fun Add(navController: NavController, vm: AddViewModel = viewModel()) {
                             }
                         }
                     })
-
                 }
 
                Button(
                    onClick = vm::submitExpense,
-                   modifier= Modifier.padding(15.dp),
+                   modifier= Modifier.testTag("submit-button").padding(15.dp),
                    shape = Shapes.large
                    ) {
                    Text(text = "Submit expense")

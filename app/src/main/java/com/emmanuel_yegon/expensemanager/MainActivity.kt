@@ -32,6 +32,7 @@ import com.emmanuel_yegon.expensemanager.pages.Reports
 import com.emmanuel_yegon.expensemanager.pages.Settings
 import com.emmanuel_yegon.expensemanager.ui.theme.ExpenseManagerTheme
 import com.emmanuel_yegon.expensemanager.ui.theme.TopAppBarBackground
+import io.sentry.compose.withSentryObservableEffect
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,7 +42,7 @@ class MainActivity : ComponentActivity() {
             ExpenseManagerTheme {
 
                 var showBottomBar by rememberSaveable { mutableStateOf(true) }
-                val navController = rememberNavController()
+                val navController = rememberNavController().withSentryObservableEffect()
                 val backStackEntry by navController.currentBackStackEntryAsState()
 
                 showBottomBar = when(backStackEntry?.destination?.route){

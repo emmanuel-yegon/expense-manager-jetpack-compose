@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("io.sentry.android.gradle") version "4.2.0"
 }
 
 android {
@@ -74,6 +75,8 @@ dependencies {
     implementation("io.github.serpro69:kotlin-faker:1.15.0")
     implementation("com.github.tehras:charts:0.2.4-alpha")
     implementation("com.google.accompanist:accompanist-pager:0.29.1-alpha")
+    implementation("io.sentry:sentry-android:7.3.0")
+    implementation("io.sentry:sentry-compose-android:7.3.0")
 
     implementation("androidx.room:room-runtime:$room_version")
     annotationProcessor("androidx.room:room-compiler:$room_version")
