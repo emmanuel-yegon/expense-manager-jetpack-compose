@@ -30,6 +30,7 @@ import com.emmanuel_yegon.expensemanager.ui.theme.LabelSecondary
 import com.emmanuel_yegon.expensemanager.ui.theme.TopAppBarBackground
 import com.emmanuel_yegon.expensemanager.ui.theme.Typography
 import com.emmanuel_yegon.expensemanager.view.models.ExpensesViewModel
+import java.text.DecimalFormat
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -99,7 +100,7 @@ fun Expenses(navController: NavController, vm: ExpensesViewModel = viewModel()) 
                         color = LabelSecondary,
                         modifier = Modifier.padding(end = 4.dp, top = 4.dp)
                     )
-                    Text("${state.sumTotal}", style = Typography.titleLarge)
+                    Text(DecimalFormat("0.#").format(state.sumTotal), style = Typography.titleLarge)
                 }
                 ExpensesList(expenses = mockExpenses, modifier= Modifier
                     .weight(1f)

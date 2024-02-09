@@ -5,16 +5,15 @@ import androidx.lifecycle.viewModelScope
 import com.emmanuel_yegon.expensemanager.mock.mockExpenses
 import com.emmanuel_yegon.expensemanager.models.Expense
 import com.emmanuel_yegon.expensemanager.models.Recurrence
+import com.emmanuel_yegon.expensemanager.utils.calculateDateRange
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
-import java.time.YearMonth
 
 data class State(
     val expenses: List<Expense> = mockExpenses,
@@ -28,47 +27,11 @@ class ReportPageViewModel(private val page: Int, val recurrence: Recurrence) : V
     private val _uiState = MutableStateFlow(State())
     val uiState: StateFlow<State> = _uiState.asStateFlow()
 
-    private lateinit var start: LocalDate
-    private lateinit var end: LocalDate
-    private  var daysInRange: Int =1
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            val today = LocalDate.now()
 
-
-            when (recurrence) {
-                Recurrence.Weekly -> {
-                    start = LocalDate.now().minusDays(today.dayOfWeek.value.toLong() - 1)
-                        .minusDays((page * 7).toLong())
-                    end = start.plusDays(6)
-                    daysInRange=7
-
-                }
-
-                Recurrence.Monthly -> {
-                    start =
-                        LocalDate.of(today.year, today.month, 1).minusMonths(page.toLong())
-                    val numberOfDays = YearMonth.of(start.year, start.month).lengthOfMonth()
-                    end = start.plusDays(numberOfDays.toLong())
-                    daysInRange=numberOfDays
-                }
-
-
-                Recurrence.Yearly -> {
-                    start = LocalDate.of(today.year, 1, 1)
-                    end = LocalDate.of(today.year, 12, 31)
-                    daysInRange=365
-                }
-
-                else -> Unit
-            }
-
-            val a = LocalDate.of(2012, 6, 30)
-            val b = LocalDate.of(2012, 6, 30)
-
-            val isAfter = a.isAfter(b)
-            val isBefore = a.isBefore(b)
+            val (start,end,daysInRange) = calculateDateRange(recurrence,page)
 
             val filteredExpenses = mockExpenses.filter { expense ->
                 (expense.date.toLocalDate().isAfter(start) && expense.date.toLocalDate()
