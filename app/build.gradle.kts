@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("io.sentry.android.gradle") version "4.2.0"
+    id("io.realm.kotlin")
 }
 
 android {
@@ -37,23 +38,21 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
     buildFeatures {
         compose = true
     }
+
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.3"
     }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
+
+
 }
 
 dependencies {
 
-    val nav_version = "2.7.6"
-    val room_version = "2.6.1"
+    val nav_version = "2.7.7"
 
     implementation("androidx.navigation:navigation-compose:$nav_version")
     implementation("androidx.core:core-ktx:1.12.0")
@@ -63,9 +62,9 @@ dependencies {
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.compose.material3:material3:1.1.2")
-    implementation("androidx.compose.material:material-icons-core:1.6.0")
-    implementation("androidx.compose.material:material-icons-extended:1.6.0")
+    implementation("androidx.compose.material3:material3:1.2.0")
+    implementation("androidx.compose.material:material-icons-core:1.6.1")
+    implementation("androidx.compose.material:material-icons-extended:1.6.1")
     implementation("com.marosseleng.android:compose-material3-datetime-pickers:0.7.2")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
     implementation("com.github.skydoves:colorpicker-compose:1.0.7")
@@ -77,9 +76,8 @@ dependencies {
     implementation("com.google.accompanist:accompanist-pager:0.29.1-alpha")
     implementation("io.sentry:sentry-android:7.3.0")
     implementation("io.sentry:sentry-compose-android:7.3.0")
-
-    implementation("androidx.room:room-runtime:$room_version")
-    annotationProcessor("androidx.room:room-compiler:$room_version")
+    implementation("io.realm.kotlin:library-base:1.11.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
 
 
     testImplementation("junit:junit:4.13.2")

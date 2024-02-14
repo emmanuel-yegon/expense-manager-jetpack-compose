@@ -23,7 +23,6 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.emmanuel_yegon.expensemanager.components.PickerTrigger
 import com.emmanuel_yegon.expensemanager.components.expensesList.ExpensesList
-import com.emmanuel_yegon.expensemanager.mock.mockExpenses
 import com.emmanuel_yegon.expensemanager.models.Recurrence
 import com.emmanuel_yegon.expensemanager.ui.theme.ExpenseManagerTheme
 import com.emmanuel_yegon.expensemanager.ui.theme.LabelSecondary
@@ -102,7 +101,7 @@ fun Expenses(navController: NavController, vm: ExpensesViewModel = viewModel()) 
                     )
                     Text(DecimalFormat("0.#").format(state.sumTotal), style = Typography.titleLarge)
                 }
-                ExpensesList(expenses = mockExpenses, modifier= Modifier
+                ExpensesList( expenses = state.expenses, modifier= Modifier
                     .weight(1f)
                     .verticalScroll(
                         rememberScrollState()

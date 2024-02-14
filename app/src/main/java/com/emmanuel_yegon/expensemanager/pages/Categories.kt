@@ -19,8 +19,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.KeyboardArrowLeft
 import androidx.compose.material.icons.automirrored.rounded.Send
-import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MediumTopAppBar
@@ -148,7 +148,7 @@ fun Categories(navController: NavController, vm: CategoriesViewModel= viewModel(
 
                             if(index < uiState.categories.size - 1){
                                 Row(modifier = Modifier.background(BackgroundElevated).height(1.dp)){
-                                    Divider(
+                                    HorizontalDivider(
                                         modifier = Modifier.padding(start=16.dp),
                                         thickness = 1.dp,
                                         color = DividerColor

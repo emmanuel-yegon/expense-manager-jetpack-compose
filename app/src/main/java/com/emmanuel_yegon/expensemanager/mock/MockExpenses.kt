@@ -43,9 +43,8 @@ val mockCategories =
         ),
     )
 
-val mockExpenses: List<Expense> = List(30) { index ->
+val mockExpenses: List<Expense> = List(30) {
     Expense(
-        id = index,
         amount = faker.random.nextInt(min = 1, max = 999).toDouble() + faker.random.nextDouble(),
         date = LocalDateTime.now()
             .minus(faker.random.nextInt(min = 300, max = 345600).toLong(), ChronoUnit.SECONDS),

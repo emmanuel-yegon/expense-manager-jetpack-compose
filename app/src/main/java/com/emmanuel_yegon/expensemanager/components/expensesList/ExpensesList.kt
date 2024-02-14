@@ -41,6 +41,6 @@ fun ExpensesList(expenses:List<Expense>, modifier: Modifier = Modifier){
 @Composable
 fun Preview(){
     ExpenseManagerTheme {
-        ExpensesList(mockExpenses)
+        ExpensesList(expenses = mockExpenses)
     }
 }
